@@ -548,9 +548,10 @@ public class RandomAccessMcaFile<T extends ChunkBase> implements Closeable, Iter
             int sectorOffset = chunkSectors[chunkIndex] >>> 8;
             int sectorSize = chunkSectors[chunkIndex] & 0xFF;
             if (sectorSize == 0) return null;
-            if (raf.length() < (sectorOffset + sectorSize) * 4096L) {
+            //MCA files are not guaranteed to be padded to sector boundaries; logical file length may be smaller than allocated sector size.
+            /*if (raf.length() < (sectorOffset + sectorSize) * 4096L) {
                 throw new EOFException();
-            }
+            }*/
             raf.seek(sectorOffset * 4096L);  // +2 for the file header
             int chunkByteSize = raf.readInt();
             if (chunkByteSize > (sectorSize * 4096) - 4) {

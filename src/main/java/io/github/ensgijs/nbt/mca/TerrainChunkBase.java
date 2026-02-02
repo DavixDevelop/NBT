@@ -48,7 +48,9 @@ public abstract class TerrainChunkBase<T extends TerrainSectionBase> extends Sec
 	protected IntArrayTag legacyHeightMap;
 	public static final VersionAware<NbtPath> LEGACY_HEIGHT_MAP_PATH = new VersionAware<NbtPath>()
 			.register(0, NbtPath.of("Level.HeightMap"))
-			.register(JAVA_1_13_18W06A.id(), null);
+			.register(JAVA_1_13_18W06A.id(), null)
+			.register(JAVA_1_13_2.id(), NbtPath.of("Level.HeightMap"))
+			.register(JAVA_1_18_21W43A.id(), NbtPath.of("HeightMap"));
 
 	protected CompoundTag heightMaps;
 	/**
@@ -146,7 +148,8 @@ public abstract class TerrainChunkBase<T extends TerrainSectionBase> extends Sec
 	protected Boolean isTerrainPopulated;
 	public static final VersionAware<NbtPath> TERRAIN_POPULATED_PATH = new VersionAware<NbtPath>()
 			.register(0, NbtPath.of("Level.TerrainPopulated"))
-			.register(JAVA_1_13_18W06A.id(), null);  // replaced by Level.Status progression
+			.register(JAVA_1_13_18W06A.id(), null)  // replaced by Level.Status progression
+			.register(JAVA_1_13_2.id(), NbtPath.of("Level.TerrainPopulated"));
 
 	protected Boolean hasLegacyStructureData;
 	public static final VersionAware<NbtPath> HAS_LEGACY_STRUCTURE_DATA_PATH = new VersionAware<NbtPath>()
@@ -176,6 +179,7 @@ public abstract class TerrainChunkBase<T extends TerrainSectionBase> extends Sec
 	 */
 	protected int yPos = NO_CHUNK_COORD_SENTINEL;
 	public static final VersionAware<NbtPath> Y_POS_PATH = new VersionAware<NbtPath>()
+			.register(JAVA_1_13_2.id(), NbtPath.of("Level.yPos"))
 			.register(JAVA_1_18_21W43A.id(), NbtPath.of("yPos"));
 	public static final VersionAware<Integer> DEFAULT_WORLD_BOTTOM_Y_POS = new VersionAware<Integer>()
 			.register(0, 0)
